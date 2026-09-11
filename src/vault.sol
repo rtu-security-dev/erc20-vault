@@ -10,4 +10,8 @@ contract ERC20Vault is ERC20 {
     constructor() ERC20("VaultToken", "VT") {
         _mint(msg.sender, 500); //tokens minted to account
     }
+
+    mapping(address account => uint256) userDeposits;
+
+
 }

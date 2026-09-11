@@ -14,8 +14,8 @@ contract ERC20Vault is ERC20 {
     mapping(address => uint256) userDeposits;
     string confirmdeposit = "You have successfull deposited to the vault!";
 
-    function deposit(uint256 amount) public returns(string memory) {
-        if (userDeposits[msg.sender]>0){
+    function deposit(uint256 amount) public returns (string memory) {
+        if (userDeposits[msg.sender] > 0) {
             _burn(msg.sender, amount);
             return confirmdeposit;
         } else {

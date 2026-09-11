@@ -11,7 +11,7 @@ contract ERC20Vault is ERC20 {
         _mint(msg.sender, 500); //tokens minted to account
     }
 
-    mapping(address account => uint256) userDeposits;
+    mapping(address => uint256) userDeposits;
     string confirmdeposit = "You have successfull deposited to the vault!";
 
     function deposit(uint256 amount) public returns(string memory) {

@@ -8,11 +8,12 @@ contract ERC20Vault{
     _mint(msg.sender, 500); //tokens minted to caller //(Inspired by: https://docs.openzeppelin.com/contracts/5.x/erc20-supply)
     }
 
+    address Vault;
     mapping(address => uint256) userDeposits;
     string confirmdeposit = "You have successfull deposited to the vault!";
 
     function deposit(uint256 amount) public returns (string memory) {
-        _transfer(msg.sender, ERC20Vault, amount); 
+        _transfer(msg.sender, Vault, amount); 
         userDeposits[msg.sender] += amount;
         return confirmdeposit;
     }

@@ -8,15 +8,15 @@ Referenced: https://docs.openzeppelin.com/contracts/5.x/erc20-supply
  */
 contract ERC20Vault is ERC20 {
     constructor() ERC20("VaultToken", "VT") {
-        _mint(msg.sender, 500); //tokens minted to account
     }
 
     mapping(address => uint256) userDeposits;
     string confirmdeposit = "You have successfull deposited to the vault!";
 
     function deposit(uint256 amount) public returns (string memory) {
-        if (userDeposits[msg.sender] > 0) {
-            _burn(msg.sender, amount);
+        if (userDeposits[msg.sender] > 0) { //user must have a deposit previosuly
+            _mint(msg.sender, amount); //tokens minted to account
+            userDeposits += amount;
             return confirmdeposit;
         } else {
             return "You have no tokens to deposit!";

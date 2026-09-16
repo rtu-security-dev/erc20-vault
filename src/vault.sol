@@ -2,12 +2,13 @@
 pragma solidity ^0.8.13;
 
 import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 
 contract ERC20Vault is ERC20 {
-    constructor() ERC20("VaultToken", "VT") { //(Inspired by: https://docs.openzeppelin.com/contracts/5.x/erc20-supply)
+    constructor(address vaultOwner) 
+    ERC20("VaultToken", "VT") Ownable(vaultOwner) { //(Inspired by: https://docs.openzeppelin.com/contracts/5.x/erc20-supply and https://docs.hedera.com/evm/quickstart/deploy-with-foundry)
     }
 
-    address public Vault = owner;
     mapping(address => uint256) userDeposits;
     string confirmdeposit = "You have successfull deposited to the vault!";
 
@@ -17,7 +18,7 @@ contract ERC20Vault is ERC20 {
     }
 
     function deposit(uint256 amount) public returns (string memory) {
-        _transfer(msg.sender, Vault, amount);
+        _transfer(msg.sender, vaultOwner, amount);
         userDeposits[msg.sender] += amount;
         return confirmdeposit;
     }

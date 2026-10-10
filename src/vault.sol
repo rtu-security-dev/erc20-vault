@@ -15,17 +15,17 @@ contract ERC20Tokens is ERC20 {
 
 contract Vault is ERC20Tokens {
     address vaultaddr = address(this); //(Inspired by: https://www.geeksforgeeks.org/ethical-hacking/difference-between-this-and-addressthis-in-solidity/)
-    string confirmdeposit = "You have successfull deposited to the vault!";
     mapping(address => uint256) userDeposits;
 
     function deposit(uint256 amount) public returns (string memory) {
         _transfer(msg.sender, vaultaddr, amount);
         userDeposits[msg.sender] += amount;
-        return confirmdeposit;
+        string confirmdeposit_msg = "You have successfull deposited to the vault!";
+        return confirmdeposit_msg;
     }
 
     function viewDeposits() view public returns (string,int memory){ //User can only view their own deposits
-        return "Your total deposits are:"; 
-        return userDeposits[msg.sender];
+        string viewDeposit_msg = "Your total deposits are:"; 
+        return (viewDeposit_msg, userDeposits[msg.sender]);
     }
 }

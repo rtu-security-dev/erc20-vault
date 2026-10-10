@@ -19,18 +19,19 @@ contract Vault is ERC20Tokens {
     string error_msg = "This function is not possible";
 
     function deposit(uint256 depositAmount) public returns (string memory) {
-        if (depositAmount > tokenAmount){
+        if (depositAmount > tokenAmount) {
             string error_msg;
         } else {
-             _transfer(msg.sender, vaultaddr, depositAmount);
+            _transfer(msg.sender, vaultaddr, depositAmount);
             userDeposits[msg.sender] += depositAmount;
             string confirmdeposit_msg = "You have successfull deposited to the vault!";
             return confirmdeposit_msg;
         }
     }
 
-    function viewDeposits() view public returns (string,int memory){ //User can only view their own deposits
-        string viewDeposit_msg = "Your total deposits are:"; 
+    function viewDeposits() public view returns (string, int256 memory) {
+        //User can only view their own deposits
+        string viewDeposit_msg = "Your total deposits are:";
         return (viewDeposit_msg, userDeposits[msg.sender]);
     }
 }

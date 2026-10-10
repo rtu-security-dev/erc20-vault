@@ -24,7 +24,8 @@ contract Vault is ERC20Tokens {
         return confirmdeposit;
     }
 
-    function viewDeposits() view returns(string memory){ //User can only view their own deposits
-        return "Your total deposits are:"; userDeposits;
+    function viewDeposits() view public returns (string,int memory){ //User can only view their own deposits
+        return "Your total deposits are:"; 
+        return userDeposits[msg.sender];
     }
 }
